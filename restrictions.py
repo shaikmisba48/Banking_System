@@ -18,7 +18,7 @@ def _datatypecheck(data_type):#setting restrictions like name can only have stri
        if not isinstance(data_type,str):
               raise(TypeError("INVALID DATA TYPE IT CAN ONLY BE A STRING"))       
 def _balancedatatype(balance):
-       if  ( isinstance(balance,float )) or ( isinstance(balance,int)):
+       if  ( isinstance(balance,float )):
               raise(ValueError("ONLY FLOAT AND INT DATATYPE IS ALLOWED"))       
 
 def _Overdraft_limit(account_typ):
