@@ -92,15 +92,14 @@ class Current(Bank_account):
             raise(ValueError("CROSSED YOUR OVERDRAFT LIMIT"))
         return super().debit(amount)
 
-
-
+database.drop_table()
 
 acc1=Current("misba","8977889",78.0,"current")
 print(acc1.debit(200))
 database.add_account(acc1)
-acc2=Savings('nirmal','89776548',7000,'savings')
+acc2=Savings('nirmal','1502070',7000,'savings')
 database.add_account(acc2)
-print(acc2.debit(400))
+print(acc2.debit(400.50))
 database.update_balance(acc2)
 print(acc1.credit(7000))
 database.update_balance(acc1)
