@@ -94,13 +94,26 @@ class Current(Bank_account):
 
 #database.drop_table()
 
-
+real_bal=database.balance_equalise(89776548)
 acc1=Current("misba","8977889",78.0,"current")
-print(acc1.debit(200))
-database.add_account(acc1)
-acc2=Savings('nirmal','89776548',7000,'savings')
-database.add_account(acc2)
-print(acc2.debit(400))
+#print(acc1.debit(200))
+#database.add_account(acc1)
+acc2=Savings('nirmal','89776548',real_bal[0],'savings')
+#database.add_account(acc2)
+#print(acc2.debit(400))
+
+#database.update_balance(acc2)
+print(acc2.debit(800))
 database.update_balance(acc2)
-print(acc1.credit(7000))
-database.update_balance(acc1)
+
+
+print(acc2.debit(200))
+database.update_balance(acc2)
+
+
+#print(acc1.credit(7000))
+#database.update_balance(acc1)
+
+
+
+"""problem is that the balance resets to supplied balance thanusing it fron the database """

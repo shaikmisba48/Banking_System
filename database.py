@@ -48,6 +48,29 @@ def drop_table():
                 connect.commit()
         finally:
                 connect.close()
+                """"why we are defining this is that because that account baalance is always resets to the entered balance rather than getting it from database """
+def balance_equalise(account_no):
+        connect=sqlite3.connect("Bank_Accounts.db")
+        cursor=connect.cursor()
+        try:
+                cursor.execute("""SELECT Balance FROM Bank_Accounts WHERE Account_Number is ?""",(account_no,))
+                row=cursor.fetchone()
+
+                if  row is not None:
+                        
+                        return row
+                else:
+                        raise(ValueError("Invalid Account Number"))
+               
+               
+
+
+
+               
+        finally:
+               connect.close()
+
+       
           
      
      
