@@ -119,7 +119,26 @@ def get_transac_history(account_no):
               
        finally:
               connect.close()
+
+""""we required this function in main.py bcoz that deposit and withdraw using the selected account thoes
+methods needs current and saving objects"""
+def get_account(account_no):
+       connect=sqlite3.connect("Bank_Accounts.db")
+       cursor=connect.cursor()
+       try:
+              cursor.execute("""SELECT * FROM Bank_Accounts WHERE Account_Number = ?""",(account_no,))
+              row=cursor.fetchone()
+              if not row:
+                     raise(ValueError("INVALID ACCOUNT NUMBER"))
+              else:
+                     return row
+
+
               
+             
+       finally:
+              connect.close()
+
               
                
        

@@ -112,7 +112,7 @@ print("After deposit :",acc2.balance)
 saved_balance=database.balance_equalise(89776548)
 print("Balance saved in database :",saved_balance[0])"""
 
-database.get_transac_history(89776548)
+#database.get_transac_history(89776548)
 
 
 
