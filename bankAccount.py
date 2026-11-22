@@ -92,7 +92,7 @@ class Current(Bank_account):
             raise(ValueError("CROSSED YOUR OVERDRAFT LIMIT"))
         return super().debit(amount)
 
-
+#database.drop_table()
 
 
 acc1=Current("misba","8977889",78.0,"current")

@@ -38,6 +38,16 @@ def update_balance(account):
                 connect.commit()
         finally:
                 connect.close()
+def drop_table():
+        connect=sqlite3.connect("Bank_Accounts.db")
+        cursor=connect.cursor()
+        try:
+                cursor.execute("""DROP TABLE IF EXISTS Bank_Accounts""")
+                
+                
+                connect.commit()
+        finally:
+                connect.close()
           
      
      
