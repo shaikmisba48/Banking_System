@@ -94,7 +94,7 @@ class Current(Bank_account):
 
 #database.drop_table()
 
-real_bal=database.balance_equalise(89776548)
+"""real_bal=database.balance_equalise(89776548)
 acc1=Current("misba","8977889",78.0,"current")
 acc2=Savings('nirmal','89776548',real_bal[0],'savings')
 
@@ -110,7 +110,9 @@ database.tranction_history(acc2,'Credit',500)
 print("After deposit :",acc2.balance)
 
 saved_balance=database.balance_equalise(89776548)
-print("Balance saved in database :",saved_balance[0])
+print("Balance saved in database :",saved_balance[0])"""
+
+database.get_transac_history(89776548)
 
 
 

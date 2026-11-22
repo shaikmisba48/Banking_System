@@ -99,6 +99,28 @@ def tranction_history(account,transaction_type,amount):#this func acts as both s
         
         finally:
                connect.close()
+
+def get_transac_history(account_no):
+       connect=sqlite3.connect("Bank_Accounts.db")
+       cursor=connect.cursor()
+       try:
+              cursor.execute("""SELECT * FROM Transaction_history WHERE Account_Number = ?""",(account_no,))
+              rows=cursor.fetchall()
+              if not rows:
+                     print("NO TRANSACTIONS FOUND")
+              else:
+                     for row in rows:
+                      print(f"{row[2]}|Amount : {row[3]}|"
+                            f"Balance After : {row[4]}|Time : {row[5]}")
+              
+
+
+
+              
+       finally:
+              connect.close()
+              
+              
                
        
        
