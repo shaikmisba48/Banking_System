@@ -28,21 +28,12 @@ def add_account(account):
         finally:
             connect.close()
 
-def update_balance(account):
-        connect=sqlite3.connect("Bank_Accounts.db")
-        cursor=connect.cursor()
-        try:
-                cursor.execute("""UPDATE Bank_accounts SET Balance=? WHERE Account_Number=?""",(account.balance,account.account_no))
-                
-                
-                connect.commit()
-        finally:
-                connect.close()
+
 def drop_table():
         connect=sqlite3.connect("Bank_Accounts.db")
         cursor=connect.cursor()
         try:
-                cursor.execute("""DROP TABLE IF EXISTS Bank_Accounts""")
+                cursor.execute("""DROP TABLE IF EXISTS Transaction_history""")
                 
                 
                 connect.commit()
@@ -70,6 +61,46 @@ def balance_equalise(account_no):
         finally:
                connect.close()
 
+""""Now building your tranction history """
+
+def tranction_history(account,transaction_type,amount):#this func acts as both storing history and updating balance to the database.
+        connect=sqlite3.connect("Bank_Accounts.db")
+        connect.execute("PRAGMA foreign_keys = ON")
+        cursor=connect.cursor()
+        #creating the treansaction history table and entering or referencing the rows and columns into it.
+        try:
+               cursor.execute("""CREATE TABLE IF NOT EXISTS Transaction_history(
+                                Transaction_ID INTEGER PRIMARY KEY ,
+                                Account_Number NUMBER(8) 
+                                        REFERENCES Bank_Accounts(Account_Number),
+                                Type VARCHAR2(6) NOT NULL,
+                                Amount INTEGER NOT NULL,
+                                Balance_After NUMBER(8,2) NULL,
+                                Time_stamp TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+                                CONSTRAINT type_dec CHECK(UPPER(Type) IN ('DEBIT','CREDIT'))
+               )""")
+               cursor.execute("""INSERT INTO Transaction_history(Account_Number,Type,Amount,Balance_After)
+               VALUES(?,?,?,?)""",(account.account_no,transaction_type,amount,account.balance))
+                #updating the balance into the database after the transaction.
+               cursor.execute("""UPDATE Bank_accounts SET Balance=? WHERE Account_Number=?""",(account.balance,account.account_no))
+
+               
+
+
+
+
+
+               connect.commit()
+        except sqlite3.Error:
+            connect.rollback()
+            raise
+             
+        
+        finally:
+               connect.close()
+               
+       
        
           
      

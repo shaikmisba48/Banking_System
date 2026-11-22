@@ -96,24 +96,21 @@ class Current(Bank_account):
 
 real_bal=database.balance_equalise(89776548)
 acc1=Current("misba","8977889",78.0,"current")
-#print(acc1.debit(200))
-#database.add_account(acc1)
 acc2=Savings('nirmal','89776548',real_bal[0],'savings')
-#database.add_account(acc2)
-#print(acc2.debit(400))
 
-#database.update_balance(acc2)
-print(acc2.debit(800))
-database.update_balance(acc2)
+print("Starting balance :",acc2.balance)
 
-
-print(acc2.debit(200))
-database.update_balance(acc2)
+acc2.debit(200)
+database.tranction_history(acc2,'Debit',200)
+print("After withdraw :",acc2.balance)
 
 
-#print(acc1.credit(7000))
-#database.update_balance(acc1)
+acc2.credit(500)
+database.tranction_history(acc2,'Credit',500)
+print("After deposit :",acc2.balance)
+
+saved_balance=database.balance_equalise(89776548)
+print("Balance saved in database :",saved_balance[0])
 
 
 
-"""problem is that the balance resets to supplied balance thanusing it fron the database """
