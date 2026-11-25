@@ -1,6 +1,9 @@
 import sqlite3
+import random
 
-def add_account(account):
+
+def add_account(name,account_type):
+        account_no=random.randint(10000000,99999999)
         connect=sqlite3.connect("Bank_Accounts.db")
         cursor=connect.cursor()
         
@@ -9,7 +12,7 @@ def add_account(account):
     
             cursor.execute("""CREATE TABLE IF NOT EXISTS Bank_Accounts(
                             Name VARCHAR2(30) NOT NULL,
-                            Account_Number NUMBER(8) PRIMARY KEY,
+                            Account_Number INTEGER PRIMARY KEY ,
                             Balance NUMBER(8,2) NULL,
                             Account_Type VARCHAR2(7) NOT NULL
 
@@ -21,10 +24,11 @@ def add_account(account):
                                 
             cursor.execute("""INSERT INTO Bank_Accounts(
                             Name,Account_Number,Balance,Account_Type
-                            )  VALUES (?,?,?,?)""",(account.name,account.account_no,account.balance,account.account_type))
+                            )  VALUES (?,?,?,?)""",(name,account_no,0,account_type.upper()))
 
-         
+            
             connect.commit()
+            return account_no
         finally:
             connect.close()
 
@@ -33,7 +37,7 @@ def drop_table():
         connect=sqlite3.connect("Bank_Accounts.db")
         cursor=connect.cursor()
         try:
-                cursor.execute("""DROP TABLE IF EXISTS Transaction_history""")
+                cursor.execute("""DROP TABLE IF EXISTS Bank_Accounts""")
                 
                 
                 connect.commit()
